@@ -1,4 +1,4 @@
-FROM ubuntu:17.04
+FROM ubuntu:17.10
 
 ENV GVM_VERSION=1.0.22
 
@@ -16,3 +16,4 @@ RUN apt-get update && \
     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/${GVM_VERSION}/binscripts/gvm-installer) && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/*
+
