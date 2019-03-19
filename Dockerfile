@@ -1,6 +1,6 @@
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 
-ENV GVM_VERSION=1.0.22
+ENV GVM_VERSION=master
 
 SHELL ["/bin/bash", "-c"]
 
@@ -14,6 +14,12 @@ RUN apt-get update && \
                         gcc \
                         build-essential && \
     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/${GVM_VERSION}/binscripts/gvm-installer) && \
+    source /root/.gvm/scripts/gvm && \
+    gvm install go1.4 -B && \
+    gvm use go1.4 --default && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/*
 
+COPY gvm.sh /bin/gvm.sh
+
+ENTRYPOINT ["/bin/gvm.sh"]
